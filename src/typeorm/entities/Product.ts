@@ -28,9 +28,9 @@ import { CartItem } from './CartItem';
 
     @OneToMany(() => CartItem, cartItem => cartItem.product)
     cartItem: CartItem;
-  
+    
     @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
-    
+
   }
   

@@ -6,7 +6,6 @@ import {
     Column,
     CreateDateColumn,
     ManyToOne,
-    JoinColumn,
   } from 'typeorm';
   import { ShoppingCart } from './ShoppingCart';
   import { Product } from './Product';
@@ -27,8 +26,9 @@ import {
   
     @Column({ type: 'decimal', precision: 10, scale: 2 })
     totalCost: number;
-  
+
     @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
+
   }
   

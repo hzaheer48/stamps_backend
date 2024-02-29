@@ -1,31 +1,32 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { JwtModule } from '@nestjs/jwt';
-import { PassportModule } from '@nestjs/passport';
-import { JwtStrategy } from './jwt.strategy';
-import { User } from 'src/typeorm/entities/User';
-import { AuthController } from './controllers/auth/auth.controller';
-import { AuthService } from './services/auth/auth.service';
-import { NestjsFormDataModule } from 'nestjs-form-data';
+import { Module } from "@nestjs/common";
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { JwtModule } from "@nestjs/jwt";
+import { PassportModule } from "@nestjs/passport";
+import { JwtStrategy } from "./jwt.strategy";
+import { User } from "src/typeorm/entities/User";
+import { AuthController } from "./controllers/auth/auth.controller";
+import { AuthService } from "./services/auth/auth.service";
+import { NestjsFormDataModule } from "nestjs-form-data";
+import { UserRole } from "src/typeorm/entities/UserRole";
 
 @Module({
   imports: [
-    PassportModule.register({ defaultStrategy: 'jwt' }),
+    PassportModule.register({ defaultStrategy: "jwt" }),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
         return {
-          secret: config.get<string>('JWT_SECRET') || 'defaultSecret',
+          secret: config.get<string>("JWT_SECRET") || "defaultSecret",
           signOptions: {
-            expiresIn: config.get<string | number>('JWT_EXPIRES') || '3d',
+            expiresIn: config.get<string | number>("JWT_EXPIRES") || "3d",
           },
         };
       },
     }),
-    TypeOrmModule.forFeature([User]),
-    NestjsFormDataModule
+    TypeOrmModule.forFeature([User, UserRole]),
+    NestjsFormDataModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
