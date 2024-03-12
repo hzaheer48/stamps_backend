@@ -14,6 +14,10 @@ import { ShoppingCartsModule } from "./shopping-carts/shopping-carts.module";
 import { CartItemsModule } from './cart-items/cart-items.module';
 import { Address } from "./typeorm/entities/Address";
 import { AddressesModule } from './addresses/addresses.module';
+import { OrdersModule } from './orders/orders.module';
+import { Order } from "./typeorm/entities/Orders";
+import { OrderItemsModule } from './order-items/order-items.module';
+import { OrderItem } from "./typeorm/entities/OrderItem";
 
 @Module({
   imports: [
@@ -24,7 +28,7 @@ import { AddressesModule } from './addresses/addresses.module';
       username: "root",
       password: "",
       database: "stamps",
-      entities: [User, UserRole, Address,Product, ShoppingCart, CartItem],
+      entities: [User, UserRole, Address,Product, ShoppingCart, CartItem,Order,OrderItem],
       synchronize: true,
     }),
     UsersModule,
@@ -33,6 +37,8 @@ import { AddressesModule } from './addresses/addresses.module';
     ShoppingCartsModule,
     CartItemsModule,
     AddressesModule,
+    OrdersModule,
+    OrderItemsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

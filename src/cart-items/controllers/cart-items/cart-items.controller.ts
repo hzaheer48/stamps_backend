@@ -13,11 +13,9 @@ export class CartItemsController {
   @UseGuards(AuthGuard("jwt"))
   async createCartItem(
     @Req() req,
-    @Body() cartItemData: Partial<CartItem>,
     @Query("productId") productId: number
   ): Promise<CartItem> {
     return this.cartItemService.createCartItem(
-      cartItemData,
       req.user,
       productId
     );
@@ -30,7 +28,6 @@ export class CartItemsController {
     @Req() req,
     @Body() productsInfoData: any
   ): Promise<CartItem> {
-    // Parse the stringified JSON into a JavaScript object
     const productsInfo = JSON.parse(productsInfoData.cartItemDataStringified);
     return this.cartItemService.createCheckout(
       req.user,

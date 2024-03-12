@@ -17,7 +17,6 @@ export class CartItemsService {
   ) {}
 
   async createCartItem(
-    cartData: Partial<CartItem>,
     user: any,
     productId: number
   ): Promise<CartItem> {

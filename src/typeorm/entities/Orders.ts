@@ -6,7 +6,9 @@ import {
     Column,
     CreateDateColumn,
     ManyToOne,
+    OneToMany,
   } from 'typeorm';
+  import { OrderItem } from './OrderItem';
   import { User } from './User';
   import { Address } from './Address';
   
@@ -20,6 +22,9 @@ import {
   
     @Column()
     paymentMethod: string;
+
+    @OneToMany(() => OrderItem, (orderItem) => orderItem.order)
+    orderItem: OrderItem;
   
     @ManyToOne(() => Address, { nullable: false })
     shippingAddress: Address;
@@ -35,5 +40,9 @@ import {
   
     @Column()
     totalCost: number;
+
+    @Column({ unique: true })
+    orderNumber: string;
+
   }
   
